@@ -1,12 +1,12 @@
 const http = require("http");
 const url = require("url");
 
-
 function gcd(a, b) {
-  return b === 0 ? a : gcd(b, a % b);
+  return b === 0n ? a : gcd(b, a % b);
 }
 
 function lcm(a, b) {
+  if (a === 0n || b === 0n) return 0n;
   return (a * b) / gcd(a, b);
 }
 
@@ -16,25 +16,24 @@ const server = http.createServer((req, res) => {
   const query = parsedUrl.query;
 
   if (pathname === "/akhmadovayyubbek0131_gmail_com") {
-    const x = parseInt(query.x);
-    const y = parseInt(query.y);
+    try {
+      const x = BigInt(query.x);
+      const y = BigInt(query.y);
 
-    res.setHeader("Content-Type", "text/plain");
-
-    if (Number.isNaN(x) || Number.isNaN(y) || x <= 0 || y <= 0) {
+      if (x < 0n || y < 0n) {
+        res.end("NaN");
+      } else {
+        res.end(lcm(x, y).toString());
+      }
+    } catch (e) {
       res.end("NaN");
-    } else {
-      res.end(lcm(x, y).toString());
     }
   } else {
     res.statusCode = 404;
-    res.setHeader("Content-Type", "text/plain");
     res.end("Not found");
   }
 });
 
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+server.listen(3000, () => {
+  console.log("Server running at http://localhost:3000/");
 });
