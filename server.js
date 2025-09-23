@@ -6,7 +6,8 @@ function gcd(a, b) {
 }
 
 function lcm(a, b) {
-  if (a === 0n || b === 0n) return 0n;
+  if (a === 0n) return b;  
+  if (b === 0n) return a;
   return (a * b) / gcd(a, b);
 }
 
@@ -21,12 +22,12 @@ const server = http.createServer((req, res) => {
       const y = BigInt(query.y);
 
       if (x < 0n || y < 0n) {
-        res.end("NaN");
+        res.end("0"); 
       } else {
         res.end(lcm(x, y).toString());
       }
     } catch (e) {
-      res.end("NaN");
+      res.end("0");
     }
   } else {
     res.statusCode = 404;
