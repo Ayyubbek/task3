@@ -1,6 +1,7 @@
 const http = require("http");
 const url = require("url");
 
+// EKUK (LCM) hisoblash
 function gcd(a, b) {
   return b === 0 ? a : gcd(b, a % b);
 }
@@ -17,6 +18,8 @@ const server = http.createServer((req, res) => {
     const x = parseInt(query.x);
     const y = parseInt(query.y);
 
+    res.setHeader("Content-Type", "text/plain"); 
+
     if (Number.isNaN(x) || Number.isNaN(y) || x <= 0 || y <= 0) {
       res.end("NaN");
     } else {
@@ -24,12 +27,11 @@ const server = http.createServer((req, res) => {
     }
   } else {
     res.statusCode = 404;
+    res.setHeader("Content-Type", "text/plain");
     res.end("Not found");
   }
 });
 
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+server.listen(3000, () => {
+  console.log("Server running at http://localhost:3000/");
 });
