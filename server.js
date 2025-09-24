@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
   const pathname = parsedUrl.pathname;
   const query = parsedUrl.query;
 
-  if (pathname.startsWith("/akhmadovayyubbek0131_gmail_com")) {
+  if (pathname === "/akhmadovayyubbek0131_gmail_com") {
     try {
       const x = BigInt(query.x);
       const y = BigInt(query.y);
@@ -34,6 +34,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(3000, () => {
-  console.log("Server running at http://localhost:3000/");
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}/`);
 });
