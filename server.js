@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
   const pathname = parsedUrl.pathname;
   const query = parsedUrl.query;
 
-  if (pathname.includes("akhmadovayyubbek0131_gmail_com")) {
+  if (pathname.includes("/akhmadovayyubbek0131_gmail_com")) {
     try {
       const x = BigInt(query.x);
       const y = BigInt(query.y);
