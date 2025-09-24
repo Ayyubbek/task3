@@ -6,19 +6,22 @@ function gcd(a, b) {
 }
 
 function lcm(a, b) {
-  if (a === 0n && b === 0n) return NaN; // maxsus case
+  if (a === 0n && b === 0n) return NaN;
   if (a === 0n) return b;
   if (b === 0n) return a;
   return (a * b) / gcd(a, b);
 }
 
 const server = http.createServer((req, res) => {
-  const parsedUrl = url.parse(req.url, true);
-  const pathname = parsedUrl.pathname;
-  const query = parsedUrl.query;
+  const { pathname, query } = url.parse(req.url, true);
 
   if (pathname === "/akhmadovayyubbek0131_gmail_com") {
     try {
+      if (!("x" in query) || !("y" in query)) {
+        res.end("NaN");
+        return;
+      }
+
       const x = BigInt(query.x);
       const y = BigInt(query.y);
 
@@ -39,5 +42,5 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+  console.log(`Server running on port ${PORT}`);
 });
