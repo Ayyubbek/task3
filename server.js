@@ -6,7 +6,9 @@ function gcd(a, b) {
 }
 
 function lcm(a, b) {
-  if (a === 0n || b === 0n) return 0n;
+  if (a === 0n && b === 0n) return NaN; // maxsus case
+  if (a === 0n) return b;
+  if (b === 0n) return a;
   return (a * b) / gcd(a, b);
 }
 
@@ -23,9 +25,10 @@ const server = http.createServer((req, res) => {
       if (x < 0n || y < 0n) {
         res.end("NaN");
       } else {
-        res.end(lcm(x, y).toString());
+        const result = lcm(x, y);
+        res.end(isNaN(result) ? "NaN" : result.toString());
       }
-    } catch (e) {
+    } catch {
       res.end("NaN");
     }
   } else {
