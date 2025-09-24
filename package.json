@@ -1,11 +1,8 @@
 {
   "name": "task3-server",
   "version": "1.0.0",
-  "description": "Task 3 LCM server for ilearning bot",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
-  },
-  "author": "akhmadovayyubbek0131@gmail.com",
-  "license": "MIT"
+  }
 }
